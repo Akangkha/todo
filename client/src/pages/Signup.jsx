@@ -14,17 +14,22 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    e.target.reset();
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
     const name = e.target.elements.name.value;
+    console.log("data", email, password, name);
     const data = {
       name: name,
       email: email,
       password: password,
     };
+
     const response = await register(data);
-    if (localStorage.getItem("token")) {
-      window.location.href = "/";
+
+    if (response) {
+      localStorage.setItem("token", response.token);
+      window.location.href = "/dashboard";
     }
   };
   return (
@@ -32,9 +37,9 @@ const SignUp = () => {
       <div className="xsSmall:w-[45%] flex flex-col shadow-xl p-12 bg-white w-[90%] max-w-[45rem] xsSmall:min-w-[18rem] justify-center gap-8 items-center md:items-start ">
         <section className="w-full items-center flex px-28 my-6 cursor-pointer xsSmall:h-[2.5em] justify-center xsSmall:gap-12  flex-col mbXSmall:flex-row"></section>
         <section>
-          <h3 className="text-3xl font-bold mt-12">SignIn</h3>
+          <h3 className="text-3xl font-bold mt-12">SignUp</h3>
           <p className="text-xl font-semibold mb-3 ">
-            We&apos;re glad to see you again!
+            We&apos;re glad to see you !
           </p>
           <p>
             Don&apos;t have an account?

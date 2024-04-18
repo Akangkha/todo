@@ -13,7 +13,9 @@ export const createUser = async (req, res) => {
     }
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(409).json("User already exists. Please login");
+      return res
+        .status(409)
+        .json({ message: "User already exists. Please login" });
     }
     const hashedpass = await bcrypt.hash(password, 10);
     const user = await User.create({ name, email, password: hashedpass });
@@ -43,7 +45,9 @@ export const loginUser = async (req, res) => {
       return res.status(400).send("Invalid password");
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
     if (!token) {
       return res.status(500).send("Error creating token");
     }
