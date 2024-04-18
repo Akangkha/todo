@@ -5,6 +5,7 @@ import { login } from "../lib/auth";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
+
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -25,10 +26,8 @@ const SignIn = () => {
       const response = await login(data);
       console.log("Response", response);
       if (response) {
-        console.log(response);
         if (response) {
           localStorage.setItem("token", response.token);
-          console.log(response.token);
           window.location.href = "/";
         } else {
           console.error("Token not found in the response:", response);
@@ -69,6 +68,7 @@ const SignIn = () => {
               id="name"
               type="text"
               placeholder="Name"
+              autoComplete="name"
               required
               className="border rounded-xl py-3 w-full px-4"
             />
@@ -80,6 +80,7 @@ const SignIn = () => {
               id="email"
               type="email"
               placeholder="Email"
+              autoComplete="email"
               onChange={(e) => setEmail(e.target.value)}
               required
               className="border rounded-xl py-3 w-full px-4"

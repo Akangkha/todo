@@ -1,6 +1,5 @@
-const apiUrl = process.env.REACT_APP_API_URL 
+const apiUrl = process.env.REACT_APP_SERVER_URL;
 export const login = async (userInput) => {
-  console.log("UserInput", userInput);
   try {
     const response = await fetch(`${apiUrl}/user/login`, {
       method: "POST",
@@ -19,8 +18,6 @@ export const login = async (userInput) => {
 };
 
 export const register = async (userInput) => {
-  console.log("UserInput", userInput);
-
   try {
     const response = await fetch(`${apiUrl}/user/create`, {
       method: "POST",
