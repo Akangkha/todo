@@ -1,4 +1,4 @@
-const apiUrl = "http://localhost:5000";
+const apiUrl = process.env.REACT_APP_API_URL 
 export const login = async (userInput) => {
   console.log("UserInput", userInput);
   try {
