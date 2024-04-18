@@ -24,7 +24,6 @@ export const createUser = async (req, res) => {
     });
     user.token = token;
     user.password = undefined;
-    res.status(201).json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

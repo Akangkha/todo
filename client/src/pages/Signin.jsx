@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../components/Button";
 import { MdArrowOutward } from "react-icons/md";
-import { register } from "../lib/auth";
+import { login } from "../lib/auth";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
@@ -17,14 +17,11 @@ const SignUp = () => {
     e.target.reset();
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
-    const name = e.target.elements.name.value;
-    console.log("data", email, password, name);
     const data = {
-      name: name,
       email: email,
       password: password,
     };
-    const response = await register(data);
+    const response = await login(data);
     if (response) {
       localStorage.setItem("token", response.token);
       window.location.href = "/dashboard";
