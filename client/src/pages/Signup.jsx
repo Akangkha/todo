@@ -23,6 +23,9 @@ const SignUp = () => {
       password: password,
     };
     const response = await register(data);
+    if (localStorage.getItem("token")) {
+      window.location.href = "/";
+    }
   };
   return (
     <div className="w-full flex flex-col items-center justify-center py-24 min-h-screen overflow-x-hidden bg-[#b9ecff] ">
