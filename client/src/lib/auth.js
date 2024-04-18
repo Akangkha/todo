@@ -4,6 +4,7 @@ export const login = async (userInput) => {
   try {
     const response = await fetch(`${apiUrl}/user/login`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
