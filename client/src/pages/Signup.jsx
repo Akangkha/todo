@@ -17,8 +17,6 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     e.target.reset();
-
-    console.log("data", email, password, name);
     const data = {
       name: name,
       email: email,
@@ -27,7 +25,7 @@ const SignUp = () => {
     const response = await register(data);
     if (response) {
       localStorage.setItem("token", response.token);
-      window.location.href = "/dashboard";
+      window.location.href = "/";
     }
   };
   return (
@@ -39,7 +37,7 @@ const SignUp = () => {
             We&apos;re glad to see you !
           </p>
           <p>
-            Have  an account?
+            Have an account?
             <Link to="/signin" className="text-green-600 m-0 px-2 ">
               Sign In!
             </Link>
@@ -96,7 +94,7 @@ const SignUp = () => {
                 <FaEyeSlash size={20} onClick={() => handleShowPassword()} />
               )}
             </div>
-           
+
             <Button
               type="submit"
               className="bg-[#5BBB7B]  hover:bg-green-800 py-3 text-white font-semibold "

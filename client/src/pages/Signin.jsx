@@ -5,9 +5,10 @@ import { login } from "../lib/auth";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
-const SignUp = () => {
+const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -15,18 +16,29 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     e.target.reset();
-    const email = e.target.elements.email.value;
-    const password = e.target.elements.password.value;
+    console.log(email, password);
     const data = {
       email: email,
       password: password,
     };
-    const response = await login(data);
-    if (response) {
-      localStorage.setItem("token", response.token);
-      window.location.href = "/dashboard";
+    try {
+      const response = await login(data);
+      console.log("Response", response);
+      if (response) {
+        console.log(response);
+        if (response) {
+          localStorage.setItem("token", response.token);
+          console.log(response.token);
+          window.location.href = "/";
+        } else {
+          console.error("Token not found in the response:", response);
+        }
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
     }
   };
+
   return (
     <div className="w-full flex flex-col items-center justify-center py-12 min-h-screen overflow-x-hidden bg-[#b9ecff] ">
       <div className="xsSmall:w-[45%] flex flex-col shadow-xl p-12 bg-white w-[90%] max-w-[45rem] xsSmall:min-w-[18rem] justify-center gap-8 items-center md:items-start ">
@@ -68,6 +80,7 @@ const SignUp = () => {
               id="email"
               type="email"
               placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
               required
               className="border rounded-xl py-3 w-full px-4"
             />
@@ -80,6 +93,7 @@ const SignUp = () => {
                 id="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 autoComplete="new-password"
                 className="outline-none w-full"
@@ -105,4 +119,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;
