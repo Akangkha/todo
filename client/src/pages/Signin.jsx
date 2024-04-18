@@ -17,21 +17,18 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     e.target.reset();
-    console.log(email, password);
     const data = {
       email: email,
       password: password,
     };
     try {
       const response = await login(data);
-      console.log("Response", response);
+
       if (response) {
-        if (response) {
-          localStorage.setItem("token", response.token);
-          window.location.href = "/";
-        } else {
-          console.error("Token not found in the response:", response);
-        }
+        localStorage.setItem("token", response.token);
+        window.location.href = "/";
+      } else {
+        console.error("Token not found in the response:", response);
       }
     } catch (error) {
       console.error("Error during login:", error);

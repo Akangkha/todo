@@ -22,10 +22,15 @@ const SignUp = () => {
       email: email,
       password: password,
     };
-    const response = await register(data);
-    if (response) {
-      localStorage.setItem("token", response.token);
-      window.location.href = "/";
+    try {
+      const response = await register(data);
+      console.log(response);
+      if (response) {
+        localStorage.setItem("token", response.token);
+        window.location.href = "/";
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
     }
   };
   return (
@@ -57,6 +62,7 @@ const SignUp = () => {
             <input
               id="name"
               type="text"
+              autoComplete="name"
               placeholder="Name"
               onChange={(e) => setName(e.target.value)}
               required
@@ -72,6 +78,7 @@ const SignUp = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
               required
+              autoComplete="email"
               className="border rounded-xl py-3 w-full px-4"
             />
             <label htmlFor="name">

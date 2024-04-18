@@ -1,9 +1,8 @@
 import React from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteUser } from "../store/reducer";
 const Cards = (props) => {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users);
   const handleDelete = (id) => {
     dispatch(deleteUser(id));
   };

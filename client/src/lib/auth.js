@@ -10,10 +10,9 @@ export const login = async (userInput) => {
       body: JSON.stringify(userInput),
     });
     const data = await response.json();
-    console.log("data", data);
     return data;
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 };
 
@@ -29,6 +28,6 @@ export const register = async (userInput) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 };
