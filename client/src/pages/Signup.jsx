@@ -39,9 +39,9 @@ const SignUp = () => {
             We&apos;re glad to see you !
           </p>
           <p>
-            Don&apos;t have an account?
+            Have  an account?
             <Link to="/signin" className="text-green-600 m-0 px-2 ">
-              Sign Up!
+              Sign In!
             </Link>
           </p>
         </section>
