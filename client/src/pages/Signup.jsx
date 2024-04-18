@@ -7,7 +7,9 @@ import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -15,9 +17,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     e.target.reset();
-    const email = e.target.elements.email.value;
-    const password = e.target.elements.password.value;
-    const name = e.target.elements.name.value;
+
     console.log("data", email, password, name);
     const data = {
       name: name,
@@ -60,6 +60,7 @@ const SignUp = () => {
               id="name"
               type="text"
               placeholder="Name"
+              onChange={(e) => setName(e.target.value)}
               required
               className="border rounded-xl py-3 w-full px-4"
             />
@@ -70,6 +71,7 @@ const SignUp = () => {
             <input
               id="email"
               type="email"
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
               required
               className="border rounded-xl py-3 w-full px-4"
@@ -84,6 +86,7 @@ const SignUp = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 required
+                onChange={(e) => setPassword(e.target.value)}
                 autoComplete="new-password"
                 className="outline-none w-full"
               />
