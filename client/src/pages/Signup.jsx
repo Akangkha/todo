@@ -24,18 +24,15 @@ const SignUp = () => {
       email: email,
       password: password,
     };
-
     const response = await register(data);
-
     if (response) {
       localStorage.setItem("token", response.token);
       window.location.href = "/dashboard";
     }
   };
   return (
-    <div className="w-full flex flex-col items-center justify-center py-24 min-h-screen overflow-x-hidden bg-[#b9ecff] ">
+    <div className="w-full flex flex-col items-center justify-center py-12 min-h-screen overflow-x-hidden bg-[#b9ecff] ">
       <div className="xsSmall:w-[45%] flex flex-col shadow-xl p-12 bg-white w-[90%] max-w-[45rem] xsSmall:min-w-[18rem] justify-center gap-8 items-center md:items-start ">
-        <section className="w-full items-center flex px-28 my-6 cursor-pointer xsSmall:h-[2.5em] justify-center xsSmall:gap-12  flex-col mbXSmall:flex-row"></section>
         <section>
           <h3 className="text-3xl font-bold mt-12">SignUp</h3>
           <p className="text-xl font-semibold mb-3 ">
@@ -43,7 +40,7 @@ const SignUp = () => {
           </p>
           <p>
             Don&apos;t have an account?
-            <Link to="/signup" className="text-green-600 m-0 px-2 ">
+            <Link to="/signin" className="text-green-600 m-0 px-2 ">
               Sign Up!
             </Link>
           </p>
@@ -96,24 +93,14 @@ const SignUp = () => {
                 <FaEyeSlash size={20} onClick={() => handleShowPassword()} />
               )}
             </div>
-            <div className="full flex justify-between items-center text-sm px-1 flex-col lg:flex-row">
-              <div>
-                <input type="checkbox" className="accent-green-500" /> Remember
-                me
-              </div>
-              <div className="hover:text-green-600 cursor-pointer">
-                Lost your password?
-              </div>
-            </div>
+           
             <Button
               type="submit"
               className="bg-[#5BBB7B]  hover:bg-green-800 py-3 text-white font-semibold "
             >
-              SignIn Now
+              SignUp Now
               <MdArrowOutward />
             </Button>
-
-            <p className="text-center">OR</p>
           </div>
         </form>
       </div>
