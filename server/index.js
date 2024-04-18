@@ -4,12 +4,13 @@ import { config } from "dotenv";
 import cors from "cors";
 import { connect } from "mongoose";
 import compress from "compression";
-
-config();
+import user from "./src/routes/UserRoutes.js";
+import dotenv from "dotenv";    
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 3300;
 const mongo_uri =
-  process.env.MONGO_URI || "mongodb://localhost:27017/internFair";
+  process.env.MONGO_URI || "mongodb://localhost:27017/todo";
 
 app.use(compress());
 app.use(cors());
@@ -20,6 +21,7 @@ app.use("/", (req, res) => {
   res.send("Hello World");
 });
 
+app.use("user",user); 
 connect(mongo_uri)
   .then(() => {
     app.listen(port, () => {
