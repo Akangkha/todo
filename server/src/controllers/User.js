@@ -2,10 +2,11 @@ import User from "../models/UserModel.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import cookieParser from "cookie-parser";
+
 dotenv.config();
 export const createUser = async (req, res) => {
   try {
+    console.log(req.body);
     const { name, email, password } = req.body;
     if (!(name && email && password)) {
       return res.status(400).send("Please fill all the fields");
@@ -14,27 +15,13 @@ export const createUser = async (req, res) => {
     if (existingUser) {
       return res.status(409).send("User already exists. Please login");
     }
-    const hashedpass = await bcrypt.hash(password, 10, function (err, hash) {
-      if (err) {
-        return res.status(500).send("Error hashing password");
-      }
-      return hash;
+    const hashedpass = await bcrypt.hash(password, 10);
+    const user = await User.create({ name, email, password: hashedpass });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
     });
-    const user = await User.create(name, email, hashedpass);
-    const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" },
-      (err, token) => {
-        if (err) {
-          return res.status(500).send("Error creating token");
-        }
-        return res.status(201).send("Token created!");
-      }
-    );
     user.token = token;
     user.password = undefined;
-    user.status(201).json(user);
     res.status(201).json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -55,17 +42,12 @@ export const loginUser = async (req, res) => {
     if (!validPassword) {
       return res.status(400).send("Invalid password");
     }
-    const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" },
-      (err, token) => {
-        if (err) {
-          return res.status(500).send("Error creating token");
-        }
-        return res.status(200).send("Token created!");
-      }
-    );
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    if (!token) {
+      return res.status(500).send("Error creating token");
+    }
+
     user.token = token;
     user.password = undefined;
     const options = {
