@@ -17,6 +17,7 @@ const Navbar = () => {
       <h2>Contacts</h2>
       <section className="flex gap-6">
         <button
+        
           className="bg-green-800 rounded shadow my-8 px-4 py-2 hover:bg-green-500"
           onClick={() => handleLogout()}
         >
