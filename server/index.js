@@ -14,7 +14,10 @@ const mongo_uri = process.env.MONGO_URI || "mongodb://localhost:27017/todolist";
 
 app.use(compress());
 app.use(
-  cors({ origin: "https://user-details-6kot.vercel.app", credentials: true })
+  cors({
+    origin: ["http://localhost:3000", "https://user-details-6kot.vercel.app"],
+    credentials: true,
+  })
 );
 app.use(express.json());
 app.use(morgan("dev"));
