@@ -26,6 +26,7 @@ export const createUser = async (req, res) => {
     const options = {
       expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
       httpOnly: true,
+      domain: "user-details-6kot.vercel.app",
     };
     res.status(200).cookie("token", token, options).json({ user, token });
   } catch (error) {
@@ -47,7 +48,7 @@ export const loginUser = async (req, res) => {
     }
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
-      return res.status(400).json({message:"Invalid password"});
+      return res.status(400).json({ message: "Invalid password" });
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
@@ -62,6 +63,7 @@ export const loginUser = async (req, res) => {
     const options = {
       expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
       httpOnly: true,
+      domain: "user-details-6kot.vercel.app",
     };
     res.status(200).cookie("token", token, options).json({ user, token });
   } catch (error) {

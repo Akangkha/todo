@@ -6,14 +6,14 @@ import Signup from "./pages/Signup.jsx";
 import "./App.css";
 const App = () => {
   const token = localStorage.getItem("token");
-
+  console.log(token);
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path="/"
           element={
-            token !== "undefined" ? <Dashboard /> : <Navigate to="/signin" />
+            token !== "undefined" && token!==null ? <Dashboard /> : <Navigate to="/signin" />
           } // If the token is present, render the Dashboard component, else redirect to the Signin component
         />
         <Route path="/signin" element={<Signin />} />
