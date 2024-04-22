@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Signin from "./pages/Signin.jsx";
 import Signup from "./pages/Signup.jsx";
+
 import "./App.css";
 const App = () => {
   const token = localStorage.getItem("token");

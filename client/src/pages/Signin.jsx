@@ -5,7 +5,7 @@ import { login } from "../lib/auth";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
-
+import { ToastContainer, toast } from "react-toast";
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -23,20 +23,23 @@ const SignIn = () => {
     };
     try {
       const response = await login(data);
-
-      if (response) {
+      if (response && response.token) {
         localStorage.setItem("token", response.token);
         window.location.href = "/";
+        toast.success("Login Successful");
       } else {
         console.error("Token not found in the response:", response);
+        toast.error("Login Failed");
       }
     } catch (error) {
+      toast.error("Login Failed");
       console.error("Error during login:", error);
     }
   };
 
   return (
     <div className="w-full flex flex-col items-center justify-center py-12 min-h-screen overflow-x-hidden bg-[#b9ecff] ">
+      <ToastContainer />
       <div className="xsSmall:w-[45%] flex flex-col shadow-xl p-12 bg-white w-[90%] max-w-[45rem] xsSmall:min-w-[18rem] justify-center gap-8 items-center md:items-start ">
         <section>
           <h3 className="text-3xl font-bold mt-12">SignIn</h3>

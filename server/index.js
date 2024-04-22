@@ -1,6 +1,5 @@
 import express from "express";
 import morgan from "morgan";
-import { config } from "dotenv";
 import cors from "cors";
 import { connect } from "mongoose";
 import compress from "compression";
@@ -14,11 +13,12 @@ const port = process.env.PORT || 3300;
 const mongo_uri = process.env.MONGO_URI || "mongodb://localhost:27017/todolist";
 
 app.use(compress());
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(
+  cors({ origin: "https://user-details-6kot.vercel.app", credentials: true })
+);
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
-
 app.use("/user", user);
 
 app.get("/", (req, res) => {
