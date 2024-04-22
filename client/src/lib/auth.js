@@ -20,6 +20,7 @@ export const register = async (userInput) => {
   try {
     const response = await fetch(`${apiUrl}/user/create`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

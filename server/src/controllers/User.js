@@ -6,7 +6,6 @@ import dotenv from "dotenv";
 dotenv.config();
 export const createUser = async (req, res) => {
   try {
-    console.log(req.body);
     const { name, email, password } = req.body;
     if (!(name && email && password)) {
       return res.status(400).json({ message: "Please fill all the details!" });
